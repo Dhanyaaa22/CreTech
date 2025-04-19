@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Quote Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="logo.png" alt="Logo">
+    <h1>Daily Quote Generator</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" id="nav-home">Home</a></li>
+      <li><a href="#" id="nav-all-quotes">All Quote</a></li>
+      <li><a href="#" id="nav-about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="home-container">
+  <section id="home-section">
+    <h2>Get Inspired!</h2>
+    <div class="quote-display">
+      <p id="quote-text">In the middle of every difficulty lies opportunity.</p>
+      <p id="author">- Albert Einstein</p>
+    </div>
+    <div class="controls">
+      <button id="new-quote-btn">New Quote</button>
+      <button id="save-quote-btn">Save Quote</button>
+    </div>
+
+    <section id="write-quote-section">
+      <h2>Write Your Own Quote</h2>
+      <textarea id="custom-quote" placeholder="Enter your inspiring quote here..."></textarea>
+      <button id="save-custom-quote-btn">Save Your Quote</button>
+      <div class="share-buttons">
+        <button id="share-email-btn">Share via Email</button>
+        <button id="share-twitter-btn">Share on Twitter</button>
+        <button id="share-whatsapp-btn">Share on WhatsApp</button>
+      </div>
+    </section>
+  </section>
+
+  <section class="home-image">
+    <img src="img1.jpg" alt="Inspirational Image">
+  </section>
+
+  <div id="all-quotes-container">
+    <div class="all-quotes-image">
+      <img src="girl.webp" alt="Cartoon Girl">
+    </div>
+    <section id="all-quotes-section">
+      <h2>All Quotes</h2>
+      <div class="all-quotes-content">
+        <div class="quote-box saved-quotes-section">
+          <h3>Saved Quotes</h3>
+          <ul id="saved-quotes-list"></ul>
+        </div>
+        <div class="quote-box predefined-quotes-section">
+          <h3>All Predefined Quotes</h3>
+          <ul id="predefined-quotes-list"></ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="about-section" class="about-section" style="display: none;">
+    <div class="about-text">
+      <h2>About Us</h2>
+      <p>
+        Welcome to the <strong>Daily Quotes Generator</strong> — your go-to space for daily motivation and inspiration!
+        Our goal is simple: to lift your spirits, spark positivity, and help you start each day with a powerful thought.
+        Whether you're looking for wisdom, humor, or a little push to keep going, we've got a quote for every mood.
+      </p>
+      <p>
+        We believe the right quote at the right time can shift your mindset, fuel your goals,
+        and bring a little magic to your everyday routine. Save your favorites, explore new quotes,
+        and let words empower your journey.
+      </p>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
