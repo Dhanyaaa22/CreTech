@@ -1,0 +1,139 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url('boy.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: fadeInBackground 2s ease forwards;
+}
+
+@keyframes fadeInBackground {
+    from { background-color: rgba(240, 240, 240, 0); }
+    to { background-color: #f0f0f0; }
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 48px;
+    border-radius: 24px;
+    box-shadow: 0 19.2px 38.4px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timer-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+}
+
+.timer {
+    font-size: 144px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+    color: #222;
+    letter-spacing: -3.2px;
+    text-shadow: 0 4.8px 3.2px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { font-size: 144px; }
+    to { font-size: 147.2px; }
+}
+
+.controls {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.btn {
+    padding: 16px 40px;
+    font-size: 22.4px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+    background-color: #45a049;
+    transform: translateY(-3.2px);
+    box-shadow: 0 11.2px 19.2px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    background-color: #388e3c;
+    transform: translateY(0);
+    box-shadow: 0 3.2px 6.4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary { background-color: #007BFF; }
+.btn-primary:hover { background-color: #0056b3; }
+
+.btn-secondary { background-color: #e0e0e0; color: #333; }
+.btn-secondary:hover { background-color: #c2c2c2; }
+
+#reset { background-color: #f44336; color: white; }
+#reset:hover { background-color: #d32f2f; }
+
+.label {
+    font-size: 28.8px;
+    color: #555;
+    margin-bottom: 12px;
+    text-shadow: 0 1.6px 1.6px rgba(0, 0, 0, 0.05);
+}
+
+.session-controls {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+    align-items: center;
+}
+
+.session-label {
+    font-size: 19.2px;
+    color: #777;
+    margin-right: 8px;
+}
+
+.session-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 3.2px 6.4px rgba(0, 0, 0, 0.1);
+}
+
+.session-button:hover {
+    background-color: #c2c2c2;
+    transform: translateY(-1.6px);
+}
+
+.session-button:active {
+    background-color: #b0b0b0;
+    transform: translateY(0);
+}
+
+.session-time {
+    font-size: 16px;
+    color: #555;
+    margin: 0 8px;
+}

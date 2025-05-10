@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Greeting Card Builder</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Lobster&family=Pacifico&family=Playfair+Display&family=Montserrat&family=Raleway&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2980b9;
+            --secondary-color: #27ae60;
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1100px;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            flex: 1 1 50%;
+            padding: 30px;
+            background: linear-gradient(135deg, #e2ebf5, #f6f9fc);
+        }
+
+        .form-section h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-section form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-section form input,
+        .form-section form textarea,
+        .form-section form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .form-section form button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .preview-section {
+            flex: 1 1 50%;
+            padding: 30px;
+            background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+            url('./new.png') center center / cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #eee;
+        }
+
+        .card {
+            width: 350px;
+            min-height: 300px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .card.rounded {
+            border-radius: 30px;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .card .signature {
+            font-style: italic;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        #card-message {
+            text-align: justify;
+        }
+
+        #download-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 6px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .preview-section {
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+        }
+
+        button, input, textarea, select {
+            cursor: default !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-section">
+        <h1>Create Your Greeting Card</h1>
+        <form id="card-form">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" required placeholder="Enter your name" />
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" required placeholder="Write your message"></textarea>
+
+            <label for="occasion">Occasion:</label>
+            <select id="occasion" required>
+                <option value="">Select an occasion</option>
+                <option value="🎂 Happy Birthday">Happy Birthday</option>
+                <option value="❤️ Happy Anniversary">Happy Anniversary</option>
+                <option value="🎉 Congratulations">Congratulations</option>
+                <option value="🙏 Thank You">Thank You</option>
+            </select>
+
+            <label for="predefined">Choose a Wish (or write your own):</label>
+            <select id="predefined">
+                <option value="">-- Select a wish --</option>
+            </select>
+
+            <label for="bgcolor">Card Background Color:</label>
+            <input type="color" id="bgcolor" value="#ffffff" />
+
+            <label for="font">Select Font Style:</label>
+            <select id="font">
+                <option value="'Roboto', sans-serif">Roboto (Default)</option>
+                <option value="'Lobster', cursive">Lobster</option>
+                <option value="'Pacifico', cursive">Pacifico</option>
+                <option value="'Playfair Display', serif">Playfair Display</option>
+                <option value="'Montserrat', sans-serif">Montserrat</option>
+                <option value="'Raleway', sans-serif">Raleway</option>
+            </select>
+
+            <label for="rounded">Rounded Corners:</label>
+            <input type="checkbox" id="rounded" />
+
+            <button type="button" id="generate-btn">Generate Card</button>
+        </form>
+    </div>
+
+    <div class="preview-section">
+        <div id="card" class="card">
+            <h2 id="card-occasion"></h2>
+            <p id="card-message"></p>
+            <p class="signature" id="card-signature"></p>
+        </div>
+        <button id="download-btn">Download Card</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    const nameInput = document.getElementById('name');
+    const messageInput = document.getElementById('message');
+    const occasionInput = document.getElementById('occasion');
+    const colorInput = document.getElementById('bgcolor');
+    const fontInput = document.getElementById('font');
+    const roundedInput = document.getElementById('rounded');
+    const card = document.getElementById('card');
+    const cardOccasion = document.getElementById('card-occasion');
+    const cardMessage = document.getElementById('card-message');
+    const cardSignature = document.getElementById('card-signature');
+    const generateBtn = document.getElementById('generate-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const predefinedSelect = document.getElementById('predefined');
+
+    const wishes = {
+        "🎂 Happy Birthday": [
+            "Wishing you a day filled with happiness and a year filled with joy!",
+            "May your birthday be the beginning of a wonderful year!",
+            "Cheers to you on your special day!"
+        ],
+        "❤️ Happy Anniversary": [
+            "Wishing you both a lifetime of love and happiness!",
+            "Cheers to many more years of togetherness!",
+            "Happy anniversary to a perfect pair!"
+        ],
+        "🎉 Congratulations": [
+            "Congratulations on your well-deserved success!",
+            "You did it! So proud of your achievement.",
+            "Here’s to your next adventure—congrats!"
+        ],
+        "🙏 Thank You": [
+            "Thank you for being there when I needed you.",
+            "Your kindness means the world to me!",
+            "Grateful for all you’ve done—thank you!"
+        ]
+    };
+
+    occasionInput.addEventListener('change', () => {
+        const selected = occasionInput.value;
+        predefinedSelect.innerHTML = '<option value="">-- Select a wish --</option>';
+        if (wishes[selected]) {
+            wishes[selected].forEach(wish => {
+                const option = document.createElement('option');
+                option.value = wish;
+                option.textContent = wish;
+                predefinedSelect.appendChild(option);
+            });
+        }
+    });
+
+    predefinedSelect.addEventListener('change', () => {
+        const wish = predefinedSelect.value;
+        if (wish) {
+            messageInput.value = wish;
+        }
+    });
+
+    generateBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        const message = messageInput.value.trim();
+        const occasion = occasionInput.value;
+        const bgcolor = colorInput.value;
+        const font = fontInput.value;
+        const rounded = roundedInput.checked;
+
+        if (name && message && occasion) {
+            cardOccasion.textContent = occasion;
+            cardMessage.textContent = message;
+            cardSignature.textContent = `From: ${name}`;
+            card.style.backgroundColor = bgcolor;
+            card.style.fontFamily = font;
+            card.style.display = 'block';
+            card.classList.toggle('rounded', rounded);
+            downloadBtn.style.display = 'inline-block';
+        } else {
+            alert('Please fill in all fields!');
+        }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+        html2canvas(card).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'greeting-card.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    });
+</script>
+</body>
+</html>
