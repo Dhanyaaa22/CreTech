@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devin Travels</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Sticky Header -->
+<header class="header">
+  <div class="logo">
+    <p class="logo-text">DEVIN</p>
+    <p class="logo-text">TRAVELS</p>
+  </div>
+  <!-- Mobile Menu Toggle -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+  <nav class="nav">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#rooms" class="nav-link">Rooms</a></li>
+      <li><a href="#gallery" class="nav-link">gallery</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+
+    </ul>
+  </nav>
+</header>
+
+<!-- Banner Area -->
+<section id="home" class="banner">
+  <div class="banner-details">
+    <div class="badge">Best travel places curated just for you</div>
+    <h1 class="banner-heading">Explore The Beauty of Greece</h1>
+    <button class="btn">Explore Now</button>
+    <div class="booking">
+      <div class="inp">
+        <label for="checkin">Check In Date</label>
+        <input type="date" id="checkin" aria-label="Check In Date">
+      </div>
+      <div class="inp">
+        <label for="checkout">Check Out Date</label>
+        <input type="date" id="checkout" aria-label="Check Out Date">
+      </div>
+      <div class="inp">
+        <label for="adults">No. of Adults</label>
+        <input type="number" placeholder="0" id="adults" min="0" aria-label="Number of Adults">
+      </div>
+      <div class="inp">
+        <label for="child">No. of Children</label>
+        <input type="number" placeholder="0" id="child" min="0" aria-label="Number of Children">
+      </div>
+      <div class="inp">
+        <button class="btn book-btn" id="submitBooking">Book Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="about">
+  <p>
+    <span class="highlight">Discover</span> the most beautiful destinations tailored for your needs. We provide premium travel experiences with world-class amenities and services.
+  </p>
+</section>
+
+<!-- Rooms Section -->
+<section id="rooms" class="rooms">
+  <h1 class="section-title">Luxurious Greek Rooms and Suites</h1>
+  <p>Enjoy lavish accommodations with stunning views of Greece’s beauty.</p>
+  <div class="rooms-area">
+    <!-- Room 1 -->
+    <div class="room">
+      <div class="room-img">
+        <img class="room-image" src="room1.jpg" alt="Deluxe Villa Room">
+      </div>
+      <div class="room-details">
+        <h2>Deluxe Villa</h2>
+        <h3>$300 / Night</h3>
+        <p>Experience the elegance of our deluxe villa with top-notch facilities.</p>
+        <button class="btn">Know More</button>
+      </div>
+    </div>
+    <!-- Room 2 -->
+    <div class="room">
+      <div class="room-img">
+        <img class="room-image" src="room2.jpg" alt="Luxury Suite Room">
+      </div>
+      <div class="room-details">
+        <h2>Luxury Suite</h2>
+        <h3>$500 / Night</h3>
+        <p>Indulge yourself in the luxury of our premium suite with breathtaking views.</p>
+        <button class="btn">Know More</button>
+      </div>
+    </div>
+    <!-- Room 3 -->
+    <div class="room">
+      <div class="room-img">
+        <img class="room-image" src="room3.jpg" alt="Beachfront Room">
+      </div>
+      <div class="room-details">
+        <h2>Beachfront Room</h2>
+        <h3>$400 / Night</h3>
+        <p>Wake up to the sound of waves in our exquisite beachfront room.</p>
+        <button class="btn">Know More</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="gallery" id="gallery">
+  <h2>Our Travel Gallery</h2>
+  <div class="gallery-container">
+    <img src="gallery1.jpg" alt="Gallery Image 1">
+    <img src="gallery2.jpg" alt="Gallery Image 2">
+    <img src="gallery3.jpg" alt="Gallery Image 3">
+    <img src="gallery4.jpg" alt="Gallery Image 4">
+    <img src="gallery5.jpg" alt="Gallery Image 5">
+    <img src="gallery6.jpg" alt="Gallery Image 6">
+  </div>
+</section>
+
+
+<!-- Subscribe Section -->
+<section class="subscribe">
+  <div class="sub-text">
+    <div class="logo2">
+      <p class="logo-text">DEVIN</p>
+      <p class="logo-text">TRAVELS</p>
+    </div>
+    <p class="sub-desc">Stay updated with our latest offers and travel packages. Subscribe to our newsletter today!</p>
+  </div>
+  <div class="sub-area">
+    <h2>Subscribe to Newsletter</h2>
+    <div class="sub-form">
+      <input type="email" class="sub-inp" placeholder="Enter Email" aria-label="Enter Email">
+      <button class="btn" id="subscribeBtn">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- Admin Booking Details Section -->
+<section id="admin" class="admin">
+  <h1 class="section-title">Booking Details</h1>
+  <div id="bookingDetails" class="booking-details">
+    <p>No bookings yet. Fill out the form to see details here.</p>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Devin Travels. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
