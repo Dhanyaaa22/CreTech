@@ -1,105 +1,98 @@
+// Timer Variables
 let timerInterval;
-let timeRemaining;
-let isPaused = false;
-let sessionLength = 60; // in minutes
-let breakLength = 5;    // in minutes
-let isWorkTime = true;
+let isBreak = false; // Track whether it's a break or work session
+let sessionLength = 25; // Work session length in minutes
+let breakLength = 5; // Break session length in minutes
+let timeLeftInSeconds = sessionLength * 60;
 
-const timerDisplay = document.querySelector('.timer');
-const startButton = document.getElementById('start');
-const stopButton = document.getElementById('stop');
-const resetButton = document.getElementById('reset');
-const sessionTimeDisplay = document.getElementById('session-time');
-const decreaseSessionButton = document.getElementById('decrease-session');
-const increaseSessionButton = document.getElementById('increase-session');
+// DOM Elements
+const timerDisplay = document.getElementById("timer");
+const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const resetButton = document.getElementById("reset");
+const sessionTimeDisplay = document.getElementById("session-time");
+const decreaseSessionButton = document.getElementById("decrease-session");
+const increaseSessionButton = document.getElementById("increase-session");
+const breakTimeDisplay = document.createElement("span");
+breakTimeDisplay.id = "break-time";
 
-// New selectors for seconds control
-const decreaseSecondsButton = document.getElementById('decrease-seconds');
-const increaseSecondsButton = document.getElementById('increase-seconds');
-
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
-
+// Update Timer Display
 function updateTimerDisplay() {
-    timerDisplay.textContent = formatTime(timeRemaining);
+    const minutes = Math.floor(timeLeftInSeconds / 60);
+    const seconds = timeLeftInSeconds % 60;
+    timerDisplay.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
+// Start Timer
 function startTimer() {
-    if (timerInterval) return;
-    isPaused = false;
-    timerInterval = setInterval(updateTimer, 1000);
+    startButton.classList.add("hidden");
+    stopButton.classList.remove("hidden");
+    timerInterval = setInterval(() => {
+        if (timeLeftInSeconds > 0) {
+            timeLeftInSeconds--;
+            updateTimerDisplay();
+        } else {
+            clearInterval(timerInterval);
+            playSound(); // Play sound when timer ends
+            toggleSession(); // Switch between work and break sessions
+        }
+    }, 1000);
 }
 
+// Stop Timer
 function stopTimer() {
     clearInterval(timerInterval);
-    timerInterval = null;
-    isPaused = true;
+    startButton.classList.remove("hidden");
+    stopButton.classList.add("hidden");
 }
 
+// Reset Timer
 function resetTimer() {
-    stopTimer();
-    timeRemaining = sessionLength * 60;
+    clearInterval(timerInterval);
+    startButton.classList.remove("hidden");
+    stopButton.classList.add("hidden");
+    isBreak = false; // Reset to work session
+    timeLeftInSeconds = sessionLength * 60;
     updateTimerDisplay();
-    isPaused = true;
-    isWorkTime = true;
 }
 
-function updateTimer() {
-    if (timeRemaining > 0) {
-        timeRemaining--;
-        updateTimerDisplay();
-    } else {
-        stopTimer();
-        isWorkTime = !isWorkTime;
-        timeRemaining = (isWorkTime ? sessionLength : breakLength) * 60;
-        updateTimerDisplay();
-        startTimer();
-    }
+// Toggle Between Work and Break Session
+function toggleSession() {
+    isBreak = !isBreak;
+    timeLeftInSeconds = isBreak ? breakLength * 60 : sessionLength * 60;
+    updateTimerDisplay();
 }
 
-function decreaseSession() {
-    if (sessionLength > 1) {
-        sessionLength--;
-        sessionTimeDisplay.textContent = sessionLength;
-        if (!isWorkTime) breakLength--;
-        resetTimer();
-    }
-}
-
-function increaseSession() {
-    sessionLength++;
+// Adjust Session Length
+function adjustSessionLength(amount) {
+    sessionLength = Math.max(1, sessionLength + amount); // Minimum session length is 1 minute
     sessionTimeDisplay.textContent = sessionLength;
-    if (!isWorkTime) breakLength++;
-    resetTimer();
-}
-
-// ⏱ New second adjustment functions
-function decreaseSeconds() {
-    if (timeRemaining > 5) {
-        timeRemaining -= 5;
+    if (!isBreak) {
+        timeLeftInSeconds = sessionLength * 60;
         updateTimerDisplay();
     }
 }
 
-function increaseSeconds() {
-    timeRemaining += 5;
-    updateTimerDisplay();
+// Adjust Break Length
+function adjustBreakLength(amount) {
+    breakLength = Math.max(1, breakLength + amount); // Minimum break length is 1 minute
+    breakTimeDisplay.textContent = breakLength;
+    if (isBreak) {
+        timeLeftInSeconds = breakLength * 60;
+        updateTimerDisplay();
+    }
 }
-
-// Initialize
-timeRemaining = sessionLength * 60;
-updateTimerDisplay();
 
 // Event Listeners
-startButton.addEventListener('click', startTimer);
-stopButton.addEventListener('click', stopTimer);
-resetButton.addEventListener('click', resetTimer);
-decreaseSessionButton.addEventListener('click', decreaseSession);
-increaseSessionButton.addEventListener('click', increaseSession);
+startButton.addEventListener("click", startTimer);
+stopButton.addEventListener("click", stopTimer);
+resetButton.addEventListener("click", resetTimer);
+decreaseSessionButton.addEventListener("click", () => adjustSessionLength(-1));
+increaseSessionButton.addEventListener("click", () => adjustSessionLength(1));
+document.getElementById("decrease-break").addEventListener("click", () => adjustBreakLength(-1));
+document.getElementById("increase-break").addEventListener("click", () => adjustBreakLength(1));
 
-// Seconds controls
-decreaseSecondsButton.addEventListener('click', decreaseSeconds);
-increaseSecondsButton.addEventListener('click', increaseSeconds);
+// Initialize Timer
+updateTimerDisplay();
+sessionTimeDisplay.textContent = sessionLength;
+breakTimeDisplay.textContent = breakLength;
